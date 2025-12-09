@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
+    public $connection = 'pgsql';
+    public $withinTransaction = false;
+
     /**
      * Run the migrations.
      */
 
-    public $connection = 'pgsql'; 
-    public $withinTransaction = false;
-    
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
