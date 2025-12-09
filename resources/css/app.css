@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+/* Definimos la animación de movimiento */
+@keyframes slideBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px; /* Mueve el fondo en diagonal */
+  }
+}
+
+/* La clase que se aplica SOLO cuando el tema es 'kids' */
+.kids-pattern-bg {
+  /* Color base de fondo */
+  background-color: #fffbeb; 
+  
+  /* Patrón simple de puntos y círculos */
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.2'%3E%3Ccircle cx='10' cy='10' r='3'/%3E%3Ccircle cx='30' cy='10' r='2'/%3E%3Ccircle cx='10' cy='30' r='2'/%3E%3Ccircle cx='30' cy='30' r='3'/%3E%3Ccircle cx='20' cy='20' r='2.5'/%3E%3C/g%3E%3C/svg%3E");
+  
+  /* Hace que el patrón se repita */
+  background-repeat: repeat;
+  
+  /* Aplica la animación: 10 segundos, lineal, infinita */
+  animation: slideBackground 15s linear infinite;
+}
+
+/* Fondo animado para tema de niños - Contenedor principal */
+.kids-animated-bg {
+    position: relative;
+    background-color: #fffbeb;
+    background-image: radial-gradient(#fcd34d 15%, transparent 16%),
+                      radial-gradient(#fca5a5 15%, transparent 16%);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+}
+
+/* Capa de figuras flotantes */
+.floating-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.floating-shapes .shape {
+    position: absolute;
+    bottom: -50px;
+    animation: floatUp linear infinite;
+    opacity: 0.7;
+    font-size: 2rem;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Configuración individual de cada figura */
+.shape:nth-child(1) {
+    left: 10%;
+    font-size: 3rem;
+    animation-duration: 15s;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    left: 20%;
+    font-size: 4rem;
+    animation-duration: 25s;
+    animation-delay: 2s;
+}
+
+.shape:nth-child(3) {
+    left: 35%;
+    font-size: 2.5rem;
+    animation-duration: 18s;
+    animation-delay: 5s;
+}
+
+.shape:nth-child(4) {
+    left: 50%;
+    font-size: 3.5rem;
+    animation-duration: 20s;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(5) {
+    left: 65%;
+    font-size: 4rem;
+    animation-duration: 22s;
+    animation-delay: 8s;
+}
+
+.shape:nth-child(6) {
+    left: 80%;
+    font-size: 3rem;
+    animation-duration: 16s;
+    animation-delay: 3s;
+}
+
+.shape:nth-child(7) {
+    left: 90%;
+    font-size: 5rem;
+    animation-duration: 30s;
+    animation-delay: 10s;
+}
+
+.shape:nth-child(8) {
+    left: 5%;
+    font-size: 2.5rem;
+    animation-duration: 28s;
+    animation-delay: 12s;
+}
