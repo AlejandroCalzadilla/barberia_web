@@ -5,8 +5,12 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
+return new class extends Migration {
+
+
+    public $connection = 'pgsql'; // Aseguramos que usa el driver pgsql
+    public $withinTransaction = false; // Desactiva el wrapper de transacción de Postgres
+
     /**
      * Run the migrations.
      */
