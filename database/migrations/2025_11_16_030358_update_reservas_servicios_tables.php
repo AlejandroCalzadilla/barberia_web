@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
 
-    public $connection = 'pgsql'; 
-    public $withinTransaction = false;
-    /**
+     /**
      * Run the migrations.
      */
     public function up()
