@@ -10,6 +10,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    public $connection = 'pgsql'; 
+    public $withinTransaction = false;
+    
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
