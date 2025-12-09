@@ -64,6 +64,9 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # 11. Render asigna un puerto dinámico, pero Apache escucha en el 80 por defecto.
 # Render mapeará esto automáticamente.
+COPY docker-entrypoint.sh /usr/local/bin/
+# Aseguramos permisos de ejecución (útil si se subió desde Windows, aunque uses Ubuntu)
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 80
 
 # 12. Comando de inicio (Inicia Apache en primer plano)
