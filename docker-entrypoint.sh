@@ -35,7 +35,7 @@ php artisan config:clear
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
-npm run build --prefix /var/www/html
+
 # 5. Iniciar Apache
 echo "✅ Iniciando servidor Apache..."
 apache2-foreground

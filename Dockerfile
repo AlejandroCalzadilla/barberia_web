@@ -6,11 +6,15 @@ WORKDIR /app
 # Copiamos archivos de dependencias
 COPY package*.json vite.config.js ./
 
-# Instalamos y compilamos
-# Nota: Si usas Vue con Vite, esto generará la carpeta /public/build
-RUN npm install
+# Instalamos dependencias
+RUN npm install --production=false
+
+# Copiamos código fuente
 COPY resources ./resources
 COPY public ./public
+COPY tailwind.config.js postcss.config.js jsconfig.json ./
+
+# Compilamos assets con Vite
 RUN npm run build
 
 
@@ -50,11 +54,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # 6. Configurar directorio de trabajo
 WORKDIR /var/www/html
 
-# 7. Copiar archivos del proyecto
-COPY . .
+# 7. Copiar archivos del proyecto (excepto node_modules y public/build que ya están compilados)
+COPY --chown=www-data:www-data . .
 
 # 8. Copiar los assets compilados de Vue desde la Etapa 1
-COPY --from=frontend_build /app/public/build /var/www/html/public/build
+COPY --from=frontend_build --chown=www-data:www-data /app/public/build /var/www/html/public/build
 
 # 9. Instalar dependencias de PHP (Producción)
 RUN composer install --no-interaction --optimize-autoloader --no-dev
