@@ -27,7 +27,7 @@ fi
 
 # 3. Correr migraciones de base de datos
 echo "🔄 Ejecutando migraciones..."
-php artisan migrate --force
+php artisan migrate --seed  --force
 
 # 4. Caché de configuración y rutas (Recomendado para producción en Render)
 echo "⚡ Optimizando Laravel..."
