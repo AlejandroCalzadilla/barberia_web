@@ -11,7 +11,7 @@ const previewImage = ref(
   props.usuario.barbero?.foto_perfil 
     ? (props.usuario.barbero.foto_perfil.startsWith('http')
         ? props.usuario.barbero.foto_perfil
-        : `https://mail.tecnoweb.org.bo/inf513/grupo11sa/proyecto2/public/storage${props.usuario.barbero.foto_perfil.replace(/^\/+/, '')}`)
+        : `/${props.usuario.barbero.foto_perfil}`)
     : null
 )
 

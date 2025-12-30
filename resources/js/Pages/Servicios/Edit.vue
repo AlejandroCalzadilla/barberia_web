@@ -12,7 +12,7 @@ const previewImage = ref(
   props.servicio.imagen 
     ? (props.servicio.imagen.startsWith('http') 
         ? props.servicio.imagen 
-        : `https://mail.tecnoweb.org.bo/inf513/grupo11sa/proyecto2/public${props.servicio.imagen.replace(/^\/+/, '')}`)
+        : `/${props.servicio.imagen}`)
     : null
 )
 

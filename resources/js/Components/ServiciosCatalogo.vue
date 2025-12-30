@@ -57,7 +57,7 @@ function cerrarModal() {
         <!-- Imagen del servicio -->
         <div v-if="servicio.imagen" class="w-full h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
           <img 
-            :src="servicio.imagen.startsWith('http') ? servicio.imagen : `https://mail.tecnoweb.org.bo/inf513/grupo11sa/proyecto2/public${servicio.imagen}`" 
+            :src="servicio.imagen.startsWith('http') ? servicio.imagen : `/${servicio.imagen}`" 
             :alt="servicio.nombre"
             class="w-full h-full object-cover"
            >

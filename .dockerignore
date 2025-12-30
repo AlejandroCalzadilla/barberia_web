@@ -15,3 +15,5 @@ docker-compose.yml
 .github
 tests
 .env.testing
+run-seeders.sh
+README-RENDER.md

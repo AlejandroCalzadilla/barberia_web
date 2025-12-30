@@ -25,9 +25,14 @@ if grep -q "^APP_KEY=$" /var/www/html/.env; then
     php artisan key:generate --force
 fi
 
-# 3. Correr migraciones de base de datos
-echo "🔄 Ejecutando migraciones..."
-php artisan migrate --seed  --force
+# 3. Correr migraciones de base de datos (solo si no se han ejecutado antes)
+echo "🔄 Verificando migraciones..."
+if ! php artisan migrate:status | grep -q "Ran"; then
+    echo "Ejecutando migraciones..."
+    php artisan migrate --force
+else
+    echo "Migraciones ya ejecutadas, saltando..."
+fi
 
 # 4. Caché de configuración y rutas (Recomendado para producción en Render)
 echo "⚡ Optimizando Laravel..."
