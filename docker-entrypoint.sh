@@ -34,14 +34,9 @@ php artisan storage:link --force
 # Verificar permisos
 chmod -R 755 /var/www/html/storage/app/public
 
-# 3. Correr migraciones de base de datos (solo si no se han ejecutado antes)
-echo "🔄 Verificando migraciones..."
-if ! php artisan migrate:status | grep -q "Ran"; then
-    echo "Ejecutando migraciones..."
-    php artisan migrate --force
-else
-    echo "Migraciones ya ejecutadas, saltando..."
-fi
+# 3. Correr migraciones y seeders
+echo "🔄 Ejecutando migraciones y seeders..."
+php artisan migrate:refresh --seed --force
 
 # 4. Caché de configuración y rutas (Recomendado para producción en Render)
 echo "⚡ Optimizando Laravel..."
