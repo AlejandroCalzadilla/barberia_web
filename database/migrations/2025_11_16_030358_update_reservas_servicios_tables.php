@@ -88,24 +88,27 @@ return new class extends Migration
             $table->dropForeign(['id_servicio']);
         });
         
-        // Revert column changes
+        // Drop and recreate columns with original types
         Schema::table('reserva', function (Blueprint $table) {
-            $table->date('fecha_reserva')->change();
-            $table->time('hora_inicio')->change();
-            $table->time('hora_fin')->change();
+            // Drop the columns that were changed
+            $table->dropColumn(['fecha_reserva', 'hora_inicio', 'hora_fin']);
             
-            // Revert column names and add back dropped columns
-            $table->renameColumn('created_at', 'fecha_creacion');
+            // Recreate with original types
+            $table->date('fecha_reserva')->nullable();
+            $table->time('hora_inicio')->nullable();
+            $table->time('hora_fin')->nullable();
             
-            // Drop the added column
-            
+            // Revert column names
+            if (Schema::hasColumn('reserva', 'created_at') && !Schema::hasColumn('reserva', 'fecha_creacion')) {
+                $table->renameColumn('created_at', 'fecha_creacion');
+            }
         });
         
         // Recreate original foreign keys
         Schema::table('reserva', function (Blueprint $table) {
             $table->foreign('id_cliente')
                   ->references('id_cliente')
-                  ->on('client')
+                  ->on('cliente')
                   ->onDelete('restrict');
                   
             $table->foreign('id_barbero')
