@@ -30,6 +30,17 @@ use Carbon\Carbon;
 |
 */
 
+// Ruta para servir archivos de storage (solución para Render)
+Route::get('/storage/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    
+    if (!file_exists($fullPath)) {
+        abort(404, 'Archivo no encontrado');
+    }
+    
+    return response()->file($fullPath);
+})->where('path', '.*')->name('storage.file');
+
 // OAuth routes
 Route::get('/auth/{provider}', [SocialAuthController::class, 'redirectToProvider'])
     ->name('auth.social');

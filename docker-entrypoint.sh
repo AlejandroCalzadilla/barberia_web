@@ -27,7 +27,12 @@ fi
 
 # 2.5. Crear enlace simbólico para storage (necesario para servir imágenes)
 echo "🔗 Creando enlace simbólico para storage..."
+# Eliminar el link anterior si existe
+rm -f /var/www/html/public/storage
+# Crear el nuevo link
 php artisan storage:link --force
+# Verificar permisos
+chmod -R 755 /var/www/html/storage/app/public
 
 # 3. Correr migraciones de base de datos (solo si no se han ejecutado antes)
 echo "🔄 Verificando migraciones..."

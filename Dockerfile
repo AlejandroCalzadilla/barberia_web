@@ -65,6 +65,8 @@ RUN composer install --no-interaction --optimize-autoloader --no-dev
 
 # 10. Permisos (Crucial para que Apache pueda escribir en storage)
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chmod -R 755 /var/www/html/storage
+RUN chmod -R 755 /var/www/html/bootstrap/cache
 
 # 11. Render asigna un puerto dinámico, pero Apache escucha en el 80 por defecto.
 # Render mapeará esto automáticamente.
