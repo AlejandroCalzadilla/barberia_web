@@ -37,6 +37,23 @@ function handleImageChange(event) {
   }
 }
 
+function getImageUrl(imagen) {
+  if (!imagen) return null
+  
+  // Si ya es una URL completa, devolverla
+  if (imagen.startsWith('http')) {
+    return imagen
+  }
+  
+  // Si empieza con /storage/, devolverlo como está
+  if (imagen.startsWith('/storage/')) {
+    return imagen
+  }
+  
+  // Fallback: agregar /storage/ si no lo tiene
+  return `/storage/${imagen.replace(/^\/+/, '')}`
+}
+
 function submit() {
   form.post(route('productos.update', props.producto.id_producto), {
     forceFormData: true,
@@ -193,7 +210,7 @@ function submit() {
             <label class="block text-sm font-medium mb-1" style="color: var(--color-neutral);">Imagen</label>
             <div v-if="props.producto.imagenurl" class="mb-3">
               <p class="text-xs mb-2" style="color: var(--color-neutral);">Imagen actual:</p>
-              <img :src="props.producto.imagenurl.startsWith('http') ? props.producto.imagenurl : `/${props.producto.imagenurl}`" alt="Imagen actual" class="w-full h-auto rounded max-w-xs" />
+              <img :src="getImageUrl(props.producto.imagenurl)" alt="Imagen actual" class="w-full h-auto rounded max-w-xs" />
             </div>
             <input 
               type="file" 

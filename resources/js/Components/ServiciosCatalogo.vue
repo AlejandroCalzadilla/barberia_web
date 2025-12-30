@@ -26,6 +26,23 @@ function cerrarModal() {
   mostrarModal.value = false
   servicioSeleccionado.value = null
 }
+
+function getImageUrl(imagen) {
+  if (!imagen) return null
+  
+  // Si ya es una URL completa, devolverla
+  if (imagen.startsWith('http')) {
+    return imagen
+  }
+  
+  // Si empieza con /storage/, usar asset() para que Laravel genere la URL correcta
+  if (imagen.startsWith('/storage/')) {
+    return `/storage${imagen.replace(/^\/storage/, '')}`
+  }
+  
+  // Fallback: agregar /storage/ si no lo tiene
+  return `/storage/${imagen.replace(/^\/+/, '')}`
+}
 </script>
 
 <template>
@@ -57,7 +74,7 @@ function cerrarModal() {
         <!-- Imagen del servicio -->
         <div v-if="servicio.imagen" class="w-full h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
           <img 
-            :src="servicio.imagen.startsWith('http') ? servicio.imagen : `/${servicio.imagen}`" 
+            :src="getImageUrl(servicio.imagen)" 
             :alt="servicio.nombre"
             class="w-full h-full object-cover"
            >

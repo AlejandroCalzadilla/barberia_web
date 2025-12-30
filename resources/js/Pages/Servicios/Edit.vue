@@ -8,11 +8,26 @@ const props = defineProps({
   productos: Array,
 })
 
+function getImageUrl(imagen) {
+  if (!imagen) return null
+  
+  // Si ya es una URL completa, devolverla
+  if (imagen.startsWith('http')) {
+    return imagen
+  }
+  
+  // Si empieza con /storage/, devolverlo como está
+  if (imagen.startsWith('/storage/')) {
+    return imagen
+  }
+  
+  // Fallback: agregar /storage/ si no lo tiene
+  return `/storage/${imagen.replace(/^\/+/, '')}`
+}
+
 const previewImage = ref(
   props.servicio.imagen 
-    ? (props.servicio.imagen.startsWith('http') 
-        ? props.servicio.imagen 
-        : `/${props.servicio.imagen}`)
+    ? getImageUrl(props.servicio.imagen)
     : null
 )
 

@@ -25,6 +25,10 @@ if grep -q "^APP_KEY=$" /var/www/html/.env; then
     php artisan key:generate --force
 fi
 
+# 2.5. Crear enlace simbólico para storage (necesario para servir imágenes)
+echo "🔗 Creando enlace simbólico para storage..."
+php artisan storage:link --force
+
 # 3. Correr migraciones de base de datos (solo si no se han ejecutado antes)
 echo "🔄 Verificando migraciones..."
 if ! php artisan migrate:status | grep -q "Ran"; then
