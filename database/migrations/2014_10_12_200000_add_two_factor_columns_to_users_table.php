@@ -37,11 +37,18 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn([
-                'two_factor_secret',
-                'two_factor_recovery_codes',
-                'two_factor_confirmed_at',
-            ]);
+            $columns = ['two_factor_secret', 'two_factor_recovery_codes', 'two_factor_confirmed_at'];
+            $existingColumns = [];
+            
+            foreach ($columns as $column) {
+                if (Schema::hasColumn('users', $column)) {
+                    $existingColumns[] = $column;
+                }
+            }
+            
+            if (!empty($existingColumns)) {
+                $table->dropColumn($existingColumns);
+            }
         });
     }
 };
